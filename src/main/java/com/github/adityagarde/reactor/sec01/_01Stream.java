@@ -3,7 +3,7 @@ package com.github.adityagarde.reactor.sec01;
 import java.util.stream.Stream;
 
 //Stream Lazy Behaviour
-public class Lec01Stream {
+public class _01Stream {
 
     public static void main(String[] args) {
 

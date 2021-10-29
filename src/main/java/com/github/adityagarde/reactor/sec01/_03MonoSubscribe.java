@@ -3,7 +3,7 @@ package com.github.adityagarde.reactor.sec01;
 import com.github.adityagarde.reactor.util.Util;
 import reactor.core.publisher.Mono;
 
-public class Lec03MonoSubscribe {
+public class _03MonoSubscribe {
 
     public static void main(String[] args) {
         Mono<String> mono1 = Mono.just("ball");
