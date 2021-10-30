@@ -101,8 +101,34 @@ public interface Subscription {
 ## Project Reactor
 
 - Reactor Publisher has two implementations `Mono<T>` and `Flux<T>`.
-- MONO
+- Mono
     - It emits 0 or 1 item, followed by onComplete / onError.
-- FLUX
+- Flux
     - It emits 0 or N items, followed by onComplete / onError.
     - It can behave as an infinite stream - Fetch Data from a data source like DB and provide it to Subscriber when requested.
+
+### Mono
+
+```groovy
+import reactor.core.publisher.Mono
+
+// Demo Publisher Stub
+private static Mono<String> getName() {
+  System.out.println("Inside getName()");
+  return Mono.fromSupplier(() -> {
+    System.out.println("Generating Name...");
+    sleepSeconds(3);
+    return "Aditya Garde";
+  }).map(name -> name.toUpperCase());
+}
+```
+
+|Type |Condition       |What to use    |Links      |
+|-----|----------------|---------------|-------------|
+|Create Mono|Data Already Present |`Mono.just(data)`|[Example](https://github.com/adityagarde/java-reactive-programming/blob/main/src/main/java/com/github/adityagarde/reactor/sec01/_02MonoJust.java) [Example](https://github.com/adityagarde/java-reactive-programming/blob/main/src/main/java/com/github/adityagarde/reactor/sec01/_03MonoSubscribe.java)|
+|Create Mono|Data to be Calculated|`Mono.fromSupplier(() -> getData());` `Mono.fromCallable(() -> getData()`|[Example](https://github.com/adityagarde/java-reactive-programming/blob/main/src/main/java/com/github/adityagarde/reactor/sec01/_05MonoFromSupplier.java)|
+|Create Mono|Data is coming from CompletableFuture (Async)|`Mono.fromFuture(future)`|[Example](https://github.com/adityagarde/java-reactive-programming/blob/main/src/main/java/com/github/adityagarde/reactor/sec01/_07MonoFromFuture.java)|
+|Create Mono|Emit empty once a given Runnable is complete|`Mono.fromRunnable(runnable)`|[Example](https://github.com/adityagarde/java-reactive-programming/blob/main/src/main/java/com/github/adityagarde/reactor/sec01/_07MonoFromRunnable.java)|
+|Pass Mono as an argument|Function accepts a Mono<Addrs>, but it does not have any data.|`Mono.empty()`|[Example](https://github.com/adityagarde/java-reactive-programming/blob/main/src/main/java/com/github/adityagarde/reactor/sec01/_04MonoEmptyOrError.java)|
+|Return Mono|Function needs to return a Mono|`Mono.error()` `Mono.empty()` && Mono creation types mentioned above|[Example](https://github.com/adityagarde/java-reactive-programming/blob/main/src/main/java/com/github/adityagarde/reactor/sec01/_04MonoEmptyOrError.java)|
+
