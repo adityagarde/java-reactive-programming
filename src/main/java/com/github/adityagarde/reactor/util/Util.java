@@ -1,14 +1,13 @@
 package com.github.adityagarde.reactor.util;
 
 import com.github.javafaker.Faker;
-import org.apache.commons.lang3.time.StopWatch;
+import org.reactivestreams.Subscriber;
 
 import java.util.function.Consumer;
 
 public class Util {
 
     private static final Faker FAKER = Faker.instance();
-    public static StopWatch stopWatch = new StopWatch();
 
     public static Consumer<Object> onNext() {
         return o -> System.out.println("Received : " + o);
@@ -26,22 +25,12 @@ public class Util {
         return FAKER;
     }
 
-    public static void sleepSeconds(int seconds) {
-        try {
-            Thread.sleep(seconds * 1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public static Subscriber<Object> subscriber() {
+        return new DefaultSubscriber();
     }
 
-    public static void startTimer() {
-        stopWatch.reset();
-        stopWatch.start();
-    }
-
-    public static void timeTaken() {
-        stopWatch.stop();
-        System.out.println("Total Time Taken : " + stopWatch.getTime());
+    public static Subscriber<Object> subscriber(String name) {
+        return new DefaultSubscriber(name);
     }
 
 }
