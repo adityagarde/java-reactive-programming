@@ -20,7 +20,7 @@ public class _02FluxCreateExample {
             new Thread(runnable).start();
         }
 
-        // FluxSink is thread safe!
+        // Flux.create(FluxSink) is thread safe!
 
         Util.sleepSeconds(2);
     }
