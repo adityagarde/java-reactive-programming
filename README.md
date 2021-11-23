@@ -161,3 +161,18 @@ private static Mono<String> getName() {
 |Create Flux|From Mono Publisher|`Flux.from(mono)`|[Example](https://github.com/adityagarde/java-reactive-programming/blob/main/src/main/java/com/github/adityagarde/reactor/sec02/_09FluxFromMono.java)|
 |Create Flux|Void / Null|`Flux.empty()`|[Example](https://github.com/adityagarde/java-reactive-programming/blob/main/src/main/java/com/github/adityagarde/reactor/sec02/_01FluxIntro.java)|
 | |Exception|`Flux.error(Throwable)`||
+
+### Flux.create() & Flux.generate()
+
+|Create|Generate|
+|------|--------|
+|Accepts a `Consumer<FluxSink<T>>>`|Accepts a `Consumer<SynchronousSink<T>>`|
+|Consumer is invoked only once.|Consumer is invoked again and again based on downstream demand.|
+|Consumer can emit 0...N elements immediately|Consumer can emit only one element|
+|Publisher might not be aware of downstream processing speed, so we need to provide _Overflow Strategy_ as an additional parameter.|Publisher elements based on the downstream demand.|
+|Thread-safe|N/A|
+|`fluxSink.requestedFromDownstream()`, `fluxSink.isCancelled()`|N/A|
+
+- Flux Create Examples - [1](https://github.com/adityagarde/java-reactive-programming/blob/main/src/main/java/com/github/adityagarde/reactor/sec03/_01FluxCreate.java), [2](https://github.com/adityagarde/java-reactive-programming/blob/main/src/main/java/com/github/adityagarde/reactor/sec03/_02FluxCreateExample.java), [3](https://github.com/adityagarde/java-reactive-programming/blob/main/src/main/java/com/github/adityagarde/reactor/sec03/_04FluxCreateIssueFix.java)
+- Flux Generate Examples - [1](https://github.com/adityagarde/java-reactive-programming/blob/main/src/main/java/com/github/adityagarde/reactor/sec03/_05FluxGenerate.java), [2](https://github.com/adityagarde/java-reactive-programming/blob/main/src/main/java/com/github/adityagarde/reactor/sec03/_07FluxGenerateCounter.java)
+- Flux Push Example - [1](https://github.com/adityagarde/java-reactive-programming/blob/main/src/main/java/com/github/adityagarde/reactor/sec03/_08FluxPush.java)
