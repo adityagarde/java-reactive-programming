@@ -5,6 +5,8 @@ import reactor.core.publisher.Flux;
 
 public class _09SwitchIfEmpty {
 
+    // Fallback method if the original condition is not met
+    // Ex use case - If we don't find the data in our cache, then fallback method will directly query the DB.
     public static void main(String[] args) {
         getNumbers()
                 .filter(i -> i > 10)
